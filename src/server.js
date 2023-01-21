@@ -1,17 +1,14 @@
 import express from "express";
 import cors from "cors";
-import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+import authRouter from "./routes/AuthRoutes.js"
+import releaseRoutes from "./routes/ReleaseRoutes.js"
 
 
-
-dotenv.config();
 const server = express();
 server.use(cors());
 server.use(express.json());
 
-const mongoClient = new MongoClient(process.env.DATABASE_URL);
-let db;
+server.use([authRouter, releaseRoutes])
 
 const PORT = 5000;
 
