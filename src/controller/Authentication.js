@@ -34,7 +34,7 @@ export async function Entrar(req,res){
 
     await db.collection("sessions").insertOne({ idUsuario: userExists._id, token })
 
-    return res.status(200).send(token)
+    return res.status(200).send({idUsuario: userExists._id, name:userExists.name, token})
     
   } catch (error) {
     res.status(500).send(error.message);

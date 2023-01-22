@@ -1,21 +1,21 @@
 import db from "../config/database.js";
 
-export async function validationToken(req, res, next){
-    const {authorization} = req. headers
-    const token = authorization?.replace("Bearer ", '')
+export async function validationToken(req, res, next) {
+  const { authorization } = req.headers;
+  const token = authorization?.replace("Bearer ", "");
 
-    if (!token) return res.status(422).send("Informe o token!")
+  if (!token) return res.status(422).send("Informe o token!");
 
   try {
-    const sessionOk = await db.collection("sessions").findOne({ token })
+    const sessionOk = await db.collection("sessions").findOne({ token });
+    console.log(sessionOk)
 
-    if (!sessionOk) return res.status(401).send("Não autorizado")
+    if (!sessionOk) return res.status(401).send("Não autorizado");
 
-    res.locals.sessao = sessionOk
-    
-    next()
+    res.locals.sessao = sessionOk;
 
+    next();
   } catch (error) {
-    res.status(500).send(error)
+    res.status(500).send(error);
   }
 }
