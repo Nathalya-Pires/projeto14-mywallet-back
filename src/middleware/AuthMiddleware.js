@@ -8,7 +8,6 @@ export async function validationToken(req, res, next) {
 
   try {
     const sessionOk = await db.collection("sessions").findOne({ token });
-    console.log(sessionOk)
 
     if (!sessionOk) return res.status(401).send("Não autorizado");
 
