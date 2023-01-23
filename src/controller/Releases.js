@@ -63,7 +63,7 @@ export async function Saida(req, res) {
   console.log(negativeValue);
   try {
     await db.collection("transactions").insertOne({
-      negativeValue,
+      value: negativeValue,
       description,
       date: dateSave,
       idUsuario: idUsuario,
